@@ -22,7 +22,18 @@ export default class App extends React.Component{
     }
   }
 
-componentDidMount (name) {
+componentDidMount () {
+  return fetch('https://api.themoviedb.org/3/search/movie?api_key=43236c9b4ffaa78012ee092b4e4f74d8&language=en-US&query=john&page=1&include_adult=false')
+  .then((response)=>response.json())
+  .then((responseJSON)=>{
+    this.setState({
+      isLoading: false,
+      dataSource: responseJSON.results,
+    })
+  }).catch((err)=>{console.log(err)});
+}
+
+newFun(name){
   return fetch('https://api.themoviedb.org/3/search/movie?api_key=43236c9b4ffaa78012ee092b4e4f74d8&language=en-US&query='+ name +'&page=1&include_adult=false')
   .then((response)=>response.json())
   .then((responseJSON)=>{
@@ -42,11 +53,13 @@ render(){
     );
   }
   else{
+    
     var Movies = this.state.dataSource.map((val, key)=>{
       return(
         <View key={key}>
           {/* <Text>{val.title}</Text> */}
-          <View style={Styles.card}><Image source={{uri:"https://image.tmdb.org/t/p/w500/" + val.poster_path.toString()}} style={Styles.image}></Image>
+          <View style={Styles.card}>
+            <Image source={{uri:"https://image.tmdb.org/t/p/w500/" + val.poster_path.toString()}} style={Styles.image}></Image>
               <View style={Styles.space} ></View>
               <View style={Styles.col}>
                 <Text style={{marginTop:10, fontWeight:'bold'}}>{val.original_title}</Text>
@@ -59,9 +72,7 @@ render(){
     });
       return(
         <View>
-      <TextInput style={{ height: 50, borderColor: 'gray', borderWidth: 1 , margin: 10}}
-          onChangeText={text => onChangeText(text)}
-          ></TextInput>
+      <TextInput style={{ height: 50, borderColor: 'gray', borderWidth: 1 , margin: 10}} onChangeText={(text)=>{this.newFun(text)}}></TextInput>
           <ScrollView>
             {/* <View style={Styles.card}><Image source={{uri:"https://image.tmdb.org/t/p/w500/rRnc3XUGFLeQScHiMmdqqsyPpT9.jpg"}} style={Styles.image}></Image>
               <View style={Styles.space} ></View>
