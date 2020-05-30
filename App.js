@@ -62,17 +62,19 @@ render(){
         return(
           <View key={key}>
             {/* <Text>{val.title}</Text> */}
+            <TouchableOpacity onPress={()=>{Linking.openURL("https://www.themoviedb.org/movie/" +val.id).catch(err => console.error("Couldn't load page", err))}}>
             <View style={Styles.card}>
               
-                <View style={Styles.space} ></View>
-                <View style={Styles.col}>
-                  <Text style={{marginTop:10, fontWeight:'bold'}}>{val.original_title}</Text>
-                  <Text style={{maxHeight: 53, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
-                  <View style={{flexDirection:'row'}}>
-                  <Text style={Styles.rating}>{val.vote_average}</Text>
-                  </View>
+              <View style={Styles.space} ></View>
+              <View style={Styles.col}>
+                <Text style={{marginTop:10, fontWeight:'bold'}}>{val.original_title}</Text>
+                <Text style={{maxHeight: 53, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
+                <View style={{flexDirection:'row'}}>
+                <Text style={Styles.rating}>{val.vote_average}</Text>
                 </View>
               </View>
+            </View>
+            </TouchableOpacity>
           </View>
         );
       }
@@ -106,7 +108,7 @@ render(){
           }else{
             this.newFun(text)
           }
-        }} value={"Search Movie"}></TextInput>
+        }} placeholder={"Search Movie"}></TextInput>
           <ScrollView>
             {/* <View style={Styles.card}><Image source={{uri:"https://image.tmdb.org/t/p/w500/rRnc3XUGFLeQScHiMmdqqsyPpT9.jpg"}} style={Styles.image}></Image>
               <View style={Styles.space} ></View>
