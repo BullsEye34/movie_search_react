@@ -8,6 +8,8 @@ import {
   Dimensions,
   Image,
   ActivityIndicator,
+  TouchableOpacity,
+  Linking
 } from 'react-native';
  
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -78,6 +80,7 @@ render(){
       return(
         <View key={key}>
           {/* <Text>{val.title}</Text> */}
+          <TouchableOpacity onPress={()=>{Linking.openURL("https://www.themoviedb.org/movie/" +val.id).catch(err => console.error("Couldn't load page", err))}}>
           <View style={Styles.card}>
             <Image source={{uri:"https://image.tmdb.org/t/p/w500/" + val.poster_path.toString()}} style={Styles.image}></Image>
               <View style={Styles.space} ></View>
@@ -90,6 +93,7 @@ render(){
                 </View>
               </View>
             </View>
+          </TouchableOpacity>
         </View>
       );
     }
@@ -102,7 +106,7 @@ render(){
           }else{
             this.newFun(text)
           }
-        }}></TextInput>
+        }} value={"Search Movie"}></TextInput>
           <ScrollView>
             {/* <View style={Styles.card}><Image source={{uri:"https://image.tmdb.org/t/p/w500/rRnc3XUGFLeQScHiMmdqqsyPpT9.jpg"}} style={Styles.image}></Image>
               <View style={Styles.space} ></View>
