@@ -55,6 +55,23 @@ render(){
   else{
     
     var Movies = this.state.dataSource.map((val, key)=>{
+      if(val.poster_path==null){
+        return(
+          <View key={key}>
+            {/* <Text>{val.title}</Text> */}
+            <View style={Styles.card}>
+              
+                <View style={Styles.space} ></View>
+                <View style={Styles.col}>
+                  <Text style={{marginTop:10, fontWeight:'bold'}}>{val.original_title}</Text>
+                  <Text style={{maxHeight: 50, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
+                  <Text style={Styles.rating}>{val.vote_average}</Text>
+                </View>
+              </View>
+          </View>
+        );
+      }
+      else{
       return(
         <View key={key}>
           {/* <Text>{val.title}</Text> */}
@@ -69,6 +86,7 @@ render(){
             </View>
         </View>
       );
+    }
     });
       return(
         <View>
