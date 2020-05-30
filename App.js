@@ -9,7 +9,6 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import StarRating from 'react-native-star-rating';
  
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -67,7 +66,9 @@ render(){
                 <View style={Styles.col}>
                   <Text style={{marginTop:10, fontWeight:'bold'}}>{val.original_title}</Text>
                   <Text style={{maxHeight: 50, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
+                  <View style={{flexDirection:'row'}}>
                   <Text style={Styles.rating}>{val.vote_average}</Text>
+                  </View>
                 </View>
               </View>
           </View>
@@ -83,7 +84,10 @@ render(){
               <View style={Styles.col}>
                 <Text style={{marginTop:10, fontWeight:'bold'}}>{val.original_title}</Text>
                 <Text style={{maxHeight: 50, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
-                <Text style={Styles.rating}>{val.vote_average}</Text>
+                <View style={{flexDirection:'row', height: 20}}>
+                  <Text style={Styles.rating}>{val.vote_average}</Text>
+                  
+                </View>
               </View>
             </View>
         </View>
@@ -137,7 +141,7 @@ card:{margin: 30,
 rating:{
   color: 'blue',
   fontWeight: 'bold',
-  fontSize: 18
+  fontSize: 18, width: 60
 },
 col:{
   flexDirection:'column'
@@ -152,7 +156,6 @@ image:{
   height: 150,
   paddingBottom:10,
   zIndex: 10,
-  
 },
 space:{
   width: screenWidth/2.9,
