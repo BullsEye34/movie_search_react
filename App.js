@@ -7,30 +7,69 @@ import {
   ScrollView,
   Dimensions,
   Image,
-  ListView
+  ActivityIndicator,
 } from 'react-native';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
-const App = () => {
-return (
-<View>
-  <TextInput style={{ height: 50, borderColor: 'gray', borderWidth: 1 , margin: 10}}
-      onChangeText={text => onChangeText(text)}
-      ></TextInput>
-      <ScrollView>
-        <View style={Styles.card}><Image source={{uri:"https://image.tmdb.org/t/p/w500/rRnc3XUGFLeQScHiMmdqqsyPpT9.jpg"}} style={Styles.image}></Image>
-          <View style={Styles.space} ></View>
-          <View style={Styles.col}>
-            <Text style={{marginTop:10, fontWeight:'bold'}}>John Carter</Text>
-            <Text style={{maxHeight: 50, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
-            <Text style={Styles.rating}>7.8</Text>
-          </View>
-        </View>
-      </ScrollView>
-</View>
-);
+
+
+export default class App extends React.Component{
+    constructor(props){
+    super(props);
+    this.state={
+      isLoading: true,
+      dataSource: null,
+    }
+  }
+
+componentDidMount () {
+  return fetch('https://reactnative.dev/movies.json')
+  .then((response)=>response.json())
+  .then((responseJSON)=>{
+    this.setState({
+      isLoading: false,
+      dataSource: responseJSON.movies,
+    })
+  }).catch((err)=>{console.log(err)});
 }
 
+render(){
+  if(this.state.isLoading){
+    return(
+      <View style={{justifyContent: "center", alignItems:"center", alignContent:'center'}}>
+            <ActivityIndicator/>
+      </View>
+    );
+  }
+  else{
+    var Movies = this.state.dataSource.map((val, key)=>{
+      return(
+        <View key={key}>
+          <Text>{val.title}</Text>
+        </View>
+      );
+    });
+      return(
+        <View>
+      <TextInput style={{ height: 50, borderColor: 'gray', borderWidth: 1 , margin: 10}}
+          onChangeText={text => onChangeText(text)}
+          ></TextInput>
+          <ScrollView>
+            {/* <View style={Styles.card}><Image source={{uri:"https://image.tmdb.org/t/p/w500/rRnc3XUGFLeQScHiMmdqqsyPpT9.jpg"}} style={Styles.image}></Image>
+              <View style={Styles.space} ></View>
+              <View style={Styles.col}>
+                <Text style={{marginTop:10, fontWeight:'bold'}}>John Carter</Text>
+                <Text style={{maxHeight: 50, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+                <Text style={Styles.rating}>7.8</Text>
+              </View>
+            </View> */}
+            {Movies}
+          </ScrollView>
+    </View>
+      );
+    }
+  } 
+}
 const Styles = StyleSheet.create({
 text:{
   color: 'blue'
@@ -74,4 +113,3 @@ space:{
 }
 });
 
-export default App;
