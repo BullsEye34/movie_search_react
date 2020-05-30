@@ -107,6 +107,7 @@ render(){
               </View>
             </View> */}
             {Movies}
+            <View style={{height:100}}></View>
           </ScrollView>
     </View>
       );
