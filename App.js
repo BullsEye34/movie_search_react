@@ -90,7 +90,13 @@ render(){
     });
       return(
         <View>
-      <TextInput style={{ height: 50, borderColor: 'gray', borderWidth: 1 , margin: 10}} onChangeText={(text)=>{this.newFun(text)}}></TextInput>
+      <TextInput style={{ height: 50, borderColor: 'gray', borderWidth: 1 , margin: 10}} onChangeText={(text)=>{
+          if(text==""){
+            this.newFun("undefine")
+          }else{
+            this.newFun(text)
+          }
+        }}></TextInput>
           <ScrollView>
             {/* <View style={Styles.card}><Image source={{uri:"https://image.tmdb.org/t/p/w500/rRnc3XUGFLeQScHiMmdqqsyPpT9.jpg"}} style={Styles.image}></Image>
               <View style={Styles.space} ></View>
