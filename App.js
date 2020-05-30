@@ -9,6 +9,8 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
+import StarRating from 'react-native-star-rating';
+ 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
