@@ -65,7 +65,7 @@ render(){
                 <View style={Styles.space} ></View>
                 <View style={Styles.col}>
                   <Text style={{marginTop:10, fontWeight:'bold'}}>{val.original_title}</Text>
-                  <Text style={{maxHeight: 50, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
+                  <Text style={{maxHeight: 53, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
                   <View style={{flexDirection:'row'}}>
                   <Text style={Styles.rating}>{val.vote_average}</Text>
                   </View>
@@ -83,7 +83,7 @@ render(){
               <View style={Styles.space} ></View>
               <View style={Styles.col}>
                 <Text style={{marginTop:10, fontWeight:'bold'}}>{val.original_title}</Text>
-                <Text style={{maxHeight: 50, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
+                <Text style={{maxHeight: 53, width: screenWidth/1.8, flex: 1, flexWrap: 'wrap', marginTop:10, marginBottom:10,}}>{val.overview}</Text>
                 <View style={{flexDirection:'row', height: 20}}>
                   <Text style={Styles.rating}>{val.vote_average}</Text>
                   
